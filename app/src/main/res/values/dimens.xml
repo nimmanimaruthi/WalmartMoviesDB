@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="margin_boundaries">10dp</dimen>
+    <dimen name="title_size_large">24sp</dimen>
+    <dimen name="title_size_small">14sp</dimen>
+    <dimen name="margin_cards">2dp</dimen>
+</resources>
