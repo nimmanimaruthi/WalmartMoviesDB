@@ -14,7 +14,5 @@ class HomeViewModel(
     fun getMoviesFromServer() {
         dataSource.getMovies(++pageIndex)
     }
-    fun registerForMovies(): LiveData<List<Movie>> {
-        return moviesList
-    }
+    fun registerForMovies() = moviesList
 }

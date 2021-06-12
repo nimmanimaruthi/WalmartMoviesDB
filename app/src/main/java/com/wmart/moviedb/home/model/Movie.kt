@@ -1,6 +1,6 @@
 package com.wmart.moviedb.home.model
 
-class MoviesRecord(val page: Int,
+class MoviesData(val page: Int,
                    val total_pages: Int,
                    val results: List<Movie>)
 

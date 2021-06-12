@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">WalmartMoviesDB</string>
     <string name="pls_wait">please wait...</string>
+    <string name="released_on">"Released on : "</string>
 </resources>
