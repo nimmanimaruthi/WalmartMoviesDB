@@ -6,7 +6,7 @@ import android.os.Bundle
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.lifecycle.ViewModelProvider
-import com.bumptech.glide.Glide
+import com.squareup.picasso.Picasso
 import com.wmart.moviedb.BaseActivity
 import com.wmart.moviedb.R
 import com.wmart.moviedb.api.WebClient
@@ -36,14 +36,23 @@ class MovieDetailActivity : BaseActivity() {
                     description.text = overview
                     releaseView.text = getString(R.string.released_on) + release_date
                     genresView.text = genres.map { model -> model.name }.toString()
-                    Glide.with(this@MovieDetailActivity)
+                    Picasso.with(this@MovieDetailActivity)
                         .load(WebClient.IMAGE_BASE_URL + poster_path)
+                        .into(bannerImage)
+                }
+            } else {
+                intent.apply {
+                    titleView.text = getStringExtra(KEY_TITLE)
+                    description.text = getStringExtra(KEY_OVERVIEW)
+                    releaseView.text = getString(R.string.released_on) + getStringExtra(KEY_RELEASE)
+                    Picasso.with(this@MovieDetailActivity)
+                        .load(WebClient.IMAGE_BASE_URL + getStringExtra(KEY_IMAGE))
                         .into(bannerImage)
                 }
             }
         })
         showProgressDialog()
-        movieViewModel.getMovieDetails(intent.getIntExtra(INTENT_KEY, 0))
+        movieViewModel.getMovieDetails(intent.getIntExtra(KEY_ID, 0))
     }
 
     private fun initialiseViews() {
@@ -59,6 +68,10 @@ class MovieDetailActivity : BaseActivity() {
     }
 
     companion object {
-        const val INTENT_KEY = "movieId"
+        const val KEY_ID: String = "id"
+        const val KEY_IMAGE: String = "image_url"
+        const val KEY_TITLE: String = "title"
+        const val KEY_OVERVIEW: String = "overview"
+        const val KEY_RELEASE: String = "release"
     }
 }

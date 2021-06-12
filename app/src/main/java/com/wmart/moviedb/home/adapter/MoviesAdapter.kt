@@ -8,7 +8,6 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.squareup.picasso.Picasso
 import com.wmart.moviedb.R
 import com.wmart.moviedb.api.WebClient
@@ -18,7 +17,7 @@ import com.wmart.moviedb.home.model.Movie
 class MoviesAdapter(private var movies: List<Movie> = ArrayList()) :
     RecyclerView.Adapter<MoviesAdapter.MoviesHolder>() {
 
-    fun setData(movies: ArrayList<Movie>) {
+    fun setData(movies: List<Movie>) {
         this.movies = movies
         notifyDataSetChanged()
     }
@@ -33,12 +32,18 @@ class MoviesAdapter(private var movies: List<Movie> = ArrayList()) :
         val movie = movies.get(position)
         holder.title.text = movie.title
         holder.rating.text = movie.popularity.toString()
-        Glide.with(holder.bannerImage.context)
+        Picasso.with(holder.bannerImage.context)
             .load(WebClient.IMAGE_BASE_URL + movie.poster_path)
             .into(holder.bannerImage)
         holder.container.setOnClickListener {
             val intent = Intent(holder.container.context, MovieDetailActivity::class.java)
-            intent.putExtra(MovieDetailActivity.INTENT_KEY, movie.id)
+            intent.apply {
+                putExtra(MovieDetailActivity.KEY_ID, movie.id)
+                putExtra(MovieDetailActivity.KEY_IMAGE, movie.id)
+                putExtra(MovieDetailActivity.KEY_TITLE, movie.title)
+                putExtra(MovieDetailActivity.KEY_OVERVIEW, movie.overview)
+                putExtra(MovieDetailActivity.KEY_RELEASE, movie.release_date)
+            }
             holder.container.context.startActivity(intent)
         }
     }

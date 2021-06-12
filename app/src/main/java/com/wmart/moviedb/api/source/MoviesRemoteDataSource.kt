@@ -14,6 +14,8 @@ class MoviesRemoteDataSource : MoviesDataSource {
     private val moviesMutableLiveData: MutableLiveData<List<Movie>> = MutableLiveData()
     private val movieDetailMutableLiveData: MutableLiveData<MovieDetail> = MutableLiveData()
 
+    private var movies = ArrayList<Movie>()
+
     override fun register() = moviesMutableLiveData
 
     override fun registerForMovieDetails() = movieDetailMutableLiveData
@@ -25,12 +27,12 @@ class MoviesRemoteDataSource : MoviesDataSource {
                     call: Call<MoviesData>,
                     response: Response<MoviesData>
                 ) {
-                    val moviesList = response.body()?.results
-                    moviesMutableLiveData.postValue(moviesList)
+                    movies.addAll(response.body()?.results as Collection<Movie>)
+                    moviesMutableLiveData.postValue(movies)
                 }
 
                 override fun onFailure(call: Call<MoviesData>, t: Throwable) {
-                    moviesMutableLiveData.postValue(ArrayList())
+                    moviesMutableLiveData.postValue(movies)
                 }
             })
     }
