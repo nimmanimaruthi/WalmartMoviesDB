@@ -56,5 +56,15 @@
             android:textSize="@dimen/title_size_small"
             android:textColor="@color/white"/>
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_boundaries"
+            app:layout_constraintTop_toBottomOf="@id/release"
+            android:id="@+id/homepage_link"
+            android:autoLink="web"
+            android:textSize="@dimen/title_size_small"
+            android:textColor="@color/white"/>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

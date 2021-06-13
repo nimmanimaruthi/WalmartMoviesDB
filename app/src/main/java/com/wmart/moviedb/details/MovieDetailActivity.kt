@@ -18,6 +18,7 @@ class MovieDetailActivity : BaseActivity() {
     private lateinit var genresView: TextView
     private lateinit var description: TextView
     private lateinit var releaseView: TextView
+    private lateinit var homepageView: TextView
     private lateinit var bannerImage: ImageView
     private lateinit var movieDetails: MovieDetail
 
@@ -36,6 +37,9 @@ class MovieDetailActivity : BaseActivity() {
                     description.text = overview
                     releaseView.text = getString(R.string.released_on) + release_date
                     genresView.text = genres.map { model -> model.name }.toString()
+                    if (homepage != null) {
+                        homepageView.text = homepage
+                    }
                     Picasso.with(this@MovieDetailActivity)
                         .load(WebClient.IMAGE_BASE_URL + poster_path)
                         .into(bannerImage)
@@ -61,9 +65,12 @@ class MovieDetailActivity : BaseActivity() {
         description = findViewById(R.id.decription)
         genresView = findViewById(R.id.genres)
         releaseView = findViewById(R.id.release)
+        homepageView = findViewById(R.id.homepage_link)
         bannerImage = findViewById(R.id.banner_image)
         bannerImage.setOnClickListener {
-            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(movieDetails.homepage)))
+            if (!movieDetails.homepage?.isEmpty()!!) {
+                startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(movieDetails.homepage)))
+            }
         }
     }
 

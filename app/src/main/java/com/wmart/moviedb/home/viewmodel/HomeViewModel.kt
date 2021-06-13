@@ -1,6 +1,5 @@
 package com.wmart.moviedb.home.viewmodel
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.wmart.moviedb.api.source.MoviesRemoteDataSource
@@ -14,5 +13,6 @@ class HomeViewModel(
     fun getMoviesFromServer() {
         dataSource.getMovies(++pageIndex)
     }
+
     fun registerForMovies() = moviesList
 }

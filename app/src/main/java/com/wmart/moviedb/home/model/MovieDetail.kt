@@ -7,7 +7,7 @@ data class MovieDetail(
     val popularity: Double,
     val release_date: String,
     val poster_path: String,
-    val homepage: String
+    val homepage: String?
 )
 
 data class Genres(val id: Int, val name: String)

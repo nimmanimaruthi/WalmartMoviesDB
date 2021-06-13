@@ -8,7 +8,6 @@ import com.wmart.moviedb.home.model.MovieDetail
 class MovieDetailsViewModel(
     private val dataSource: MoviesRemoteDataSource = MoviesRemoteDataSource()
 ) : ViewModel() {
-    private var movieId: Int = 0
 
     private val movieDetailsLiveData: MutableLiveData<MovieDetail> =
         dataSource.registerForMovieDetails()
